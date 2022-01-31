@@ -1,0 +1,30 @@
+CREATE TABLE subject(
+    subject_id SERIAL PRIMARY KEY,
+    name text NOT NULL
+);
+CREATE TABLE specialty(
+    speciality_id SERIAL PRIMARY KEY,
+    name text NOT NULL
+);
+CREATE TABLE faculty(
+    faculty_id SERIAL PRIMARY KEY,
+    name text NOT NULL
+);
+CREATE TABLE student(
+    record_book_id SERIAL PRIMARY KEY UNIQUE ,
+    name TEXT NOT NULL,
+    lastname TEXT NOT NULL ,
+    receipt_date date NOT NULL,
+    faculty int references faculty(faculty_id) not null,
+    speciality int references specialty(speciality_id) not null,
+    course int not null,
+    "group" varchar not null
+ );
+ CREATE TABLE progress(
+     record_book_id INTEGER REFERENCES student(record_book_id) PRIMARY KEY,
+     semester int NOT NULL,
+     subject int references subject(subject_id) not null,
+     evaluation int NOT NULL,
+     exam_date date NOT NULL
+ );
+
